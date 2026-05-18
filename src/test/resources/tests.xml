@@ -4,6 +4,7 @@
 
     <listeners>
         <listener class-name="listener.TestListener"/>
+        <listener class-name="listener.ExtentTestListener"/>
     </listeners>
 
     <test name="Test">

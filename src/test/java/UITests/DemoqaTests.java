@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
@@ -23,6 +24,9 @@ public class DemoqaTests {
 
     @Test
     public void textBoxTest() {
+
+        Reporter.log("Acum incepe testul...");
+
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://demoqa.com/text-box");
@@ -31,6 +35,7 @@ public class DemoqaTests {
 
         Actions actions = new Actions(driver);
 
+        Reporter.log("Aici se identifica elementele cu care interactionez.. ");
         WebElement fullName = driver.findElement(By.id("userName"));
         WebElement email = driver.findElement(By.id("userEmail"));
         WebElement currentAddress = driver.findElement(By.id("currentAddress"));
@@ -38,6 +43,7 @@ public class DemoqaTests {
 
         WebElement submit = driver.findElement(By.className("btn-primary"));
 
+        Reporter.log("Se introduc datele..");
         fullName.sendKeys(fullNameValue);
         email.sendKeys("test@itschool.com");
         currentAddress.sendKeys("Timisoara");
@@ -54,6 +60,7 @@ public class DemoqaTests {
 //        Assert.assertTrue(output.isDisplayed());
 
 
+        Reporter.log("Verificarea..");
         String outputName = driver.findElement(By.id("name")).getText();
 
         System.out.println(outputName);

@@ -9,6 +9,7 @@ import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+import utilities.DriverFactory;
 
 public class DemoqaTests {
 
@@ -20,6 +21,8 @@ public class DemoqaTests {
             driver.quit();
             driver = null;
         }
+        DriverFactory.quitDriver();
+        driver = null;
     }
 
     @Test
@@ -27,7 +30,7 @@ public class DemoqaTests {
 
         Reporter.log("Acum incepe testul...");
 
-        driver = new ChromeDriver();
+        driver = DriverFactory.getDriver();
         driver.manage().window().maximize();
         driver.get("https://demoqa.com/text-box");
 
@@ -73,7 +76,7 @@ public class DemoqaTests {
 
     @Test
     public void textBoxTestNegativ() {
-        driver = new ChromeDriver();
+        driver = DriverFactory.getDriver();
         driver.manage().window().maximize();
         driver.get("https://demoqa.com/text-box");
 

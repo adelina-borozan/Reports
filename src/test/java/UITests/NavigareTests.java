@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import utilities.DriverFactory;
 
 public class NavigareTests {
 
@@ -15,14 +16,13 @@ public class NavigareTests {
     @BeforeMethod
     public void instantareBrowser(){
         driver = new ChromeDriver();
+        driver = DriverFactory.getDriver();
     }
 
     @AfterMethod
-    public void inchideBrowser(){
-        if (driver != null) {
-            driver.quit();
-            driver = null;
-        }
+    public void inchideBrowser() {
+        DriverFactory.quitDriver();
+        driver = null;
     }
 
     @Test(priority = 2)

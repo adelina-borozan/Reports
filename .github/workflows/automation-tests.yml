@@ -48,3 +48,10 @@ jobs:
           path: screenshots/
           if-no-files-found: warn
 
+      - name: Upload Extent report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: extent-report
+          path: extent-reports/
+          if-no-files-found: warn

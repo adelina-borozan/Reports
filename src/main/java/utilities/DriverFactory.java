@@ -28,13 +28,15 @@ public class DriverFactory {
 
     private static ChromeOptions getChromeOptions() {
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--disable-notifications");
 
         if (isCi()) {
             options.addArguments("--headless=new");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
             options.addArguments("--disable-gpu");
-            options.addArguments("--window-size=1920,1080");
+            options.addArguments("--remote-allow-origins=*");
         }
 
         return options;

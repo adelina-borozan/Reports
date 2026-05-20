@@ -32,6 +32,15 @@ jobs:
       - name: Run tests
         run: mvn test
 
+      - name: Generate Allure Report
+        if: always()
+        run: mvn allure:report
+
+      - name: Show generated report files
+        if: always()
+        run: |
+          find target/surefire-reports extent-reports allure-results allure-report screenshots -maxdepth 2 -type f -print 2>/dev/null || true
+
       - name: Upload reports
         if: always()
         uses: actions/upload-artifact@v4
@@ -54,4 +63,20 @@ jobs:
         with:
           name: extent-report
           path: extent-reports/
+          if-no-files-found: warn
+
+      - name: Upload Allure Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report/
+          if-no-files-found: warn
+
+      - name: Upload Allure Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results/
           if-no-files-found: warn

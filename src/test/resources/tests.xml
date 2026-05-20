@@ -3,6 +3,7 @@
 <suite name="Demo">
 
     <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
         <listener class-name="listener.TestListener"/>
         <listener class-name="listener.ExtentTestListener"/>
     </listeners>

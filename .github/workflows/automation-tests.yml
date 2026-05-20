@@ -34,12 +34,14 @@ jobs:
 
       - name: Generate Allure Report
         if: always()
-        run: mvn allure:report
+        run: |
+          mvn allure:report
+          ./.allure/allure-2.30.0/bin/allure generate allure-results --clean --single-file -o allure-report-single-file
 
       - name: Show generated report files
         if: always()
         run: |
-          find target/surefire-reports extent-reports allure-results allure-report screenshots -maxdepth 2 -type f -print 2>/dev/null || true
+          find target/surefire-reports extent-reports allure-results allure-report allure-report-single-file screenshots -maxdepth 2 -type f -print 2>/dev/null || true
 
       - name: Upload reports
         if: always()
@@ -72,6 +74,15 @@ jobs:
           name: allure-report
           path: allure-report/
           if-no-files-found: warn
+
+      - name: Upload Allure Single File Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-open-directly
+          path: allure-report-single-file/index.html
+          if-no-files-found: warn
+
 
       - name: Upload Allure Results
         if: always()
